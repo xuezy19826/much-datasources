@@ -1,5 +1,7 @@
 package com.example.conf;
 
+import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -26,7 +28,6 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = "com.example.mapper.test1", sqlSessionFactoryRef = "test1SqlSessionFactory")
 public class DataSource1Config {
 
-
     @Bean(name = "test1DataSource")
     @ConfigurationProperties(prefix = "spring.datasource.test1")
     @Primary
@@ -37,11 +38,11 @@ public class DataSource1Config {
     @Bean(name = "test1SqlSessionFactory")
     @Primary
     public SqlSessionFactory test1SqlSessionFactory(@Qualifier("test1DataSource") DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+        MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
         bean.setDataSource(dataSource);
 
-        bean.setTypeAliasesPackage("com.example.mapper.test1");
-        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+        bean.setTypeAliasesPackage("com.example.po.test1");
+        MybatisConfiguration configuration = new MybatisConfiguration();
         // 开启驼峰命名规则
         configuration.setMapUnderscoreToCamelCase(true);
         bean.setConfiguration(configuration);
