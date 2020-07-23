@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.test1.TblTestMapper">
+
+    <!-- 写入测试信息 -->
+    <insert id="saveTblTest">
+        insert into tbl_test(ID,NAME,DESCRIPTION) values(SEQ_TBL_TEST.NEXTVAL,#{entity.name},#{entity.description})
+    </insert>
+
+    <insert id="saveTblTest4Mysql">
+        insert into tbl_test(NAME,DESCRIPTION) values(#{entity.name},#{entity.description})
+    </insert>
+
+</mapper>
