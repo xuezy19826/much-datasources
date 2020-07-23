@@ -64,6 +64,7 @@ public class TblTestServiceImpl implements TblTestService {
         return json;
     }
 
+    // 主库事务可以不用指定transactional配置
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void saveTblTest1(){
@@ -82,6 +83,7 @@ public class TblTestServiceImpl implements TblTestService {
         System.out.println(a);
     }
 
+    // 从库必须指定transactional事务配置  DataSource2Config中 test2TransactionManager
     @Transactional(rollbackFor = Exception.class, value = "test2TransactionManager")
     @Override
     public void saveTblTest2(){
